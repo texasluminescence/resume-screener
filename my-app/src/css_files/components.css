@@ -1,0 +1,69 @@
+
+.ui.button.round {
+  border-radius: var(--radius-xs);
+}
+  
+.ui.button.size-sm {
+  height: 40px;
+  padding-left: 24px;
+  padding-right: 24px;
+  font-size: 16px;
+}
+
+
+  .ui.button.size-xs {
+  height: 32px;
+  padding-left: 16px;
+  padding-right: 16px; font-size: 16px;
+}
+
+
+  .ui.button.fill.gray_300 {
+    background-color: var(--gray_300);
+    color: var(--gray_900);
+  }
+  .ui.button.fill.blue_gray_900 {
+    background-color: var(--blue_gray_900);
+    color: var(--gray_100);
+  }
+
+  .ui.button {
+    text-align: center; 
+    display: flex; 
+    cursor: pointer;
+    flex-direction: row; 
+    align-items: center; 
+    justify-content: center;
+    white-space: nowrap; 
+    font-size: 16px; 
+    border-width: 1px; 
+    border-style: solid; 
+    border-radius: var(--radius-xs); 
+  }
+
+  .ui.text.size-textxs {
+    font-size: 16px; 
+    font-weight: 400; 
+    font-style: normal; 
+  }
+
+  .ui.text {
+    color: var(--gray_900); 
+    font-family: Inter; 
+  }
+
+
+
+  .ui.heading.size-headingxs {
+    font-size: 72px; 
+    font-weight: 700; 
+    font-style: bold; 
+    @media only screen and (max-width: 1050px) {
+      font-size: 48px;
+    }
+  }
+
+  .ui.heading {
+    color: var(--gray_900); 
+    font-family: Inter; 
+  }

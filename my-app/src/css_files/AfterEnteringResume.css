@@ -1,0 +1,120 @@
+.columnheader_logo-one {
+  background-color: var(--white_a700); 
+  width: 100%; 
+}
+
+.header {
+  display: flex; 
+  background-color: var(--white_a700); 
+  align-items: center; 
+  padding: var(--space-xs); 
+  border-bottom: 1px solid var(--blue_gray_100); 
+  @media only screen and (max_width: 550px) {
+    padding: 20px; 
+  }
+}
+
+.header_top-row {
+  width: 100%; 
+  display: flex; 
+  justify-content: space-between; 
+  align-items: center; 
+  max-width: 1136px; 
+  margin-left: auto; 
+  margin-right: auto; 
+  gap: 20px; 
+  @media only screen and (max-width:1050px) {
+    flex-direction: column; 
+  }
+}
+
+.header__logo {
+  height: 34px;
+  width: 40px;
+  object-fit: contain;
+}
+
+.header__navigation {
+  gap: var(--space-xs);
+  display: flex;
+  @media only screen and (max-width: 1050px) {
+      flex-direction: column;
+  }
+}
+
+.header__menu {
+  gap: 8px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.menu-item-resume-link {
+  background-color: var(--gray_100);
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  border-radius: var(--radius-xs);
+}
+
+.header__menu-item {
+  padding: 6px;
+}
+
+.header__auth {
+  gap: 12px;
+  display: flex;
+}
+
+.header__auth-button {
+  color: var(--gray_900) !important;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-color: var(--gray_600);
+  background-color: var(--gray_300) !important;
+  height: 32px;
+  min-width: 82px;
+  border-radius: 8px !important;
+}
+
+.header__auth-button-1 {
+  color: var(--gray_100) !important;
+  padding-left: 9px;
+  padding-right: 9px;
+  border-color: var(--blue_gray_900);
+  background-color: var(--blue_gray_900) !important;
+  height: 32px;
+  min-width: 82px;
+  border-radius: 8px !important;
+}
+
+.heroactions {
+  gap: 26px;
+  background-color: var(--blue_gray_100_01);
+  padding: 152px 56px;
+  @media only screen and (max-width: 1050px) {
+      padding: 20px;
+  }
+}
+
+.resume-scanner__title {
+  letter-spacing: -2.16px;
+}
+
+.button--upload {
+  color: var(--gray_100) !important;
+  margin-bottom: 6px;
+  padding-left: 23px;
+  padding-right: 23px;
+  border-color: var(--blue_gray_900);
+  background-color: var(--blue_gray_900) !important;
+  height: 40px;
+  min-width: 240px;
+  border-radius: 8px !important;
+  @media only screen and (max-width: 550px) {
+      padding-left: 20px;
+      padding-right: 20px;
+  }
+}
+
+

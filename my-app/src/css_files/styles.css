@@ -1,0 +1,23 @@
+
+:root {
+  --blue_gray_100: #d9d9d9;
+  --blue_gray_100_01: #cccccc;
+  --blue_gray_900:  #2c2c2c;
+  --gray_100: #f5f5f5;
+  --gray_300:  #e3e3e3;
+  --gray_600: #767676;
+  --gray_900: #1e1e1e;
+  --white_a700:#ffffff;
+
+  --radius-xs: 8px; 
+
+  --space-xs: 32px;
+}
+
+
+.flex-col-center-center { 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
