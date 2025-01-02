@@ -1,0 +1,66 @@
+.results-content {
+    padding: 20px;
+    max-width: 1136px;
+    margin: 0 auto;
+  }
+  
+  .heroactions2 {
+    text-align: center;
+    padding: 40px 0;
+    background-color: var(--blue_gray_100_01); 
+  }
+  
+  .resume-scanner__title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .results-score {
+    font-size: 1.25rem;
+    color: #555;
+    margin-top: 10px;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 20px 0 10px;
+  }
+  
+  .strengths-section, .improvements-section {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+  }
+  
+  .strengths-list, .improvements-list {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  .strengths-list li, .improvements-list li {
+    font-size: 1rem;
+    margin-bottom: 10px;
+  }
+  
+  .results-summary {
+    font-size: 1rem;
+    color: #333;
+    margin-top: 20px;
+  }
+  
+  .resume-preview {
+    margin-top: 20px;
+    text-align: center;
+  }
+  
+  .resume-image {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  

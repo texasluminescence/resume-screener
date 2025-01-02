@@ -90,12 +90,17 @@
 
 .heroactions {
   gap: 26px;
-  background-color: var(--blue_gray_100_01);
+  background-color: var(--blue_gray_100_01); 
   padding: 152px 56px;
+
+  min-height: 400px; 
+
   @media only screen and (max-width: 1050px) {
-      padding: 20px;
+    padding: 100px 20px; /* Adjust padding for smaller screens */
+    min-height: 300px; /* Adjust height for smaller screens */
   }
 }
+
 
 .resume-scanner__title {
   letter-spacing: -2.16px;
