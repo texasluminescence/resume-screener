@@ -1,7 +1,12 @@
+.hide-input {
+  display: none;
+}
 
 .ui.button.round {
   border-radius: var(--radius-xs);
 }
+
+
   
 .ui.button.size-sm {
   height: 40px;
