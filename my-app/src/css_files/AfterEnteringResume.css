@@ -14,6 +14,19 @@
   }
 }
 
+.loading-overlay {
+  position: absolute; /* Container-relative */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
 .header_top-row {
   width: 100%; 
   display: flex; 
@@ -29,9 +42,10 @@
 }
 
 .header__logo {
-  height: 34px;
-  width: 40px;
+  height: 75px;
+  width: 75px;
   object-fit: contain;
+  margin-right: auto;
 }
 
 .header__navigation {
@@ -43,10 +57,21 @@
 }
 
 .header__menu {
-  gap: 8px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 32rem; 
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0 2rem;
+}
+
+.header__menu-items {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
+  gap: 1rem; /* Adjust spacing between menu items */
+  margin-left: 4rem; /* Add explicit space after logo */
 }
 
 .menu-item-resume-link {
