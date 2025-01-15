@@ -46,8 +46,6 @@ const Results = () => {
 
       {/* Main Content Section */}
       <div className="results-content">
-        <MatrixRubric initialSelections={initialSelections}/>
-        {/* Resume preview */}
         <div className="resume-preview">
           {pdfUrl ? (
             <Document
@@ -66,6 +64,9 @@ const Results = () => {
           ) : (
             <p>No PDF file available to preview</p>
           )}
+        </div>
+        <div className="matrix-container">
+          <MatrixRubric initialSelections={initialSelections}/>
         </div>
       </div>
 

@@ -1,7 +1,10 @@
 .results-content {
   padding: 20px;
-  max-width: 1136px;
+  max-width: 1800px;  /* Increased from 1400px */
   margin: 0 auto;
+  display: flex;
+  gap: 40px;         /* Increased from 20px */
+  align-items: flex-start;
 }
 
 .heroactions2 {
@@ -52,8 +55,9 @@
 }
 
 .resume-preview {
-  max-width: 800px;
-  margin: 20px auto;
+  flex: 0.8;        /* Changed from 1 to make it slightly narrower */
+  max-width: 45%;   /* Changed from 50% */
+  margin: 0;
   padding: 20px;
   background: white;
   box-shadow: 0 0 10px rgba(0,0,0,0.1);
@@ -70,6 +74,12 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.matrix-container {
+  flex: 1.2;        /* Changed from 1 to give it more space */
+  max-width: 55%;   /* Changed from 50% */
+  padding-right: 20px; /* Added padding to prevent rubric from touching the edge */
 }
 
 .sd-matrix__text {
