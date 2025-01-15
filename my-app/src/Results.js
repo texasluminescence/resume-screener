@@ -1,12 +1,36 @@
-import React from 'react';
-import logo from './images/image.png';
-import './css_files/Results.css'; // Additional styles for the Results page
-import { Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { Document, Page, pdfjs } from 'react-pdf';
+import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
+import 'react-pdf/dist/esm/Page/TextLayer.css';
+import './css_files/Results.css';
 import MatrixRubric from "./MatrixRubric.js";
-import Navbar from './components/Navbar.js'; // Import the Navbar component
-import Footer from './components/Footer.js'; // Import the Footer component
+import Navbar from './components/Navbar.js';
+import Footer from './components/Footer.js'; 
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/3.6.172/pdf.worker.min.js`;
 
 const Results = () => {
+  const location = useLocation();
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
+
+  function onDocumentLoadSuccess({ numPages }) {
+    setNumPages(numPages);
+    console.log('PDF loaded successfully with', numPages, 'pages');
+  }
+
+  function onDocumentLoadError(error) {
+    console.error('Error loading PDF:', error);
+  }
+
+  const { fileData, mimeType } = location.state || {};
+  // Create URL only if we have valid PDF data
+  const pdfUrl = fileData && mimeType === 'application/pdf' 
+    ? `data:${mimeType};base64,${fileData}`
+    : null;
+
+  console.log('PDF URL created:', !!pdfUrl); // Debug log
 
   const initialSelections = {
     formatAndStyle: "Good",
@@ -25,7 +49,23 @@ const Results = () => {
         <MatrixRubric initialSelections={initialSelections}/>
         {/* Resume preview */}
         <div className="resume-preview">
-          <img src="path_to_resume_image.png" alt="Resume Preview" className="resume-image"/>
+          {pdfUrl ? (
+            <Document
+              file={pdfUrl}
+              onLoadSuccess={onDocumentLoadSuccess}
+              onLoadError={onDocumentLoadError}
+              loading="Loading PDF..."
+            >
+              <Page 
+                pageNumber={1} 
+                scale={1.5}
+                renderTextLayer={false}
+                renderAnnotationLayer={false}
+              />
+            </Document>
+          ) : (
+            <p>No PDF file available to preview</p>
+          )}
         </div>
       </div>
 

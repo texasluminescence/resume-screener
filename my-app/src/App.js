@@ -106,6 +106,7 @@ function DragDropResume({ loading, handleUploadClick }) {
 
 function App() {
   const [loading, setLoading] = useState(false);
+  const [fileData, setFileData] = useState(null);
   const navigate = useNavigate();
 
   const handleUploadClick = async (event) => {
@@ -127,9 +128,12 @@ function App() {
       }
 
       const data = await response.json();
-      console.log('Server response:', data);
+      setFileData({
+        base64Data: data.fileData,
+        mimeType: data.mimeType
+      });
       setLoading(false);
-      navigate("/results");
+      navigate("/results", { state: { fileData: data.fileData, mimeType: data.mimeType } });
 
     } catch (error) {
       console.error('Upload error:', error);

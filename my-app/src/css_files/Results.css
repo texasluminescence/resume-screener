@@ -52,8 +52,16 @@
 }
 
 .resume-preview {
-  margin-top: 20px;
-  text-align: center;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.resume-preview canvas {
+  width: 100% !important;
+  height: auto !important;
 }
 
 .resume-image {
