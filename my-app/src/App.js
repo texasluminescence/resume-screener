@@ -10,6 +10,7 @@ import logo from './images/image.png';
 import Results from './Results';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
+import Spinner from 'react-bootstrap/Spinner';
 
 const buttonStyle = {
   backgroundColor: '#FFF',
@@ -137,11 +138,40 @@ function App() {
   };
 
   return (
+
+    <>
+      {loading && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50" style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          bottom: 0,
+          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          zIndex: 9999,
+        }}>
+          <div className="spinner-border text-light" role="status" style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+          }}>
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      )}
+
+
+    
     <div className="main-container" style={{ backgroundColor: '#F4F4F4', marginBottom: '0' }}>
       <Navbar /> {/* Add the Navbar component here */}
-      <DragDropResume loading={loading} handleUploadClick={handleUploadClick} />
+      <DragDropResume loading={loading} handleUploadClick={handleUploadClick}>
+      </DragDropResume>
       <Footer /> {/* Add the Footer component here */}
     </div>
+    </>
   );
 }
 
