@@ -1,0 +1,146 @@
+/* General navbar styles */
+.navbar {
+  background-color: #fff;
+  padding: 15px 50px; /* Increased left and right padding */
+  border-bottom: 2px solid #ccc;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Ensures vertical centering */
+  position: relative;
+}
+
+/* Flex container for logo and nav items */
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Ensures vertical centering */
+  width: 100%;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center; /* Ensures vertical centering */
+}
+
+.logo-img {
+  width: 70px; /* Increased logo size */
+  height: 70px; /* Keep the height consistent */
+  margin-right: 10px;
+}
+
+.logo {
+  font-size: 28px;
+  font-weight: bold;
+  display: inline-block;
+  line-height: 1; /* Ensures the logo text is vertically centered */
+}
+
+/* Hide logo image on smaller screens */
+@media (max-width: 768px) {
+  .logo-img {
+    display: block; /* Show the logo again on small screens */
+    width: 50px; /* Reduce the size to prevent it from becoming too large */
+    height: 50px; /* Maintain aspect ratio */
+    margin-right: 10px;
+  }
+
+  .logo {
+    font-size: 22px; /* Adjust font size for smaller screens */
+  }
+}
+
+/* Hamburger button (hidden by default) */
+.hamburger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 30px;
+  cursor: pointer;
+  padding: 10px;
+  position: absolute;
+  right: 15px;
+  top: 10px;
+}
+
+/* Links within the navbar */
+.nav-links {
+  display: flex;
+  gap: 20px;
+  align-items: center; /* Ensures vertical centering */
+  margin-left: auto; /* Ensures links are aligned to the right */
+}
+
+/* Link and button styling */
+.nav-link {
+  text-decoration: none;
+  color: #000;
+  font-size: 18px;
+  position: relative;
+  transition: color 0.3s;
+  line-height: 1; /* Ensures the text is vertically centered */
+}
+
+.nav-link:hover {
+  color: #000;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 2px;
+  background-color: #000;
+  transition: width 0.3s;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.nav-btn {
+  background-color: transparent;
+  border: 1px solid #000;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.3s, color 0.3s;
+  line-height: 1; /* Ensures the button text is vertically centered */
+}
+
+.nav-btn:hover {
+  background-color: #000;
+  color: #fff;
+}
+
+/* Show/hide links on smaller screens */
+.nav-links.open {
+  display: flex;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    align-items: center; /* Ensures links are vertically centered */
+    background-color: #fff;
+    position: absolute;
+    top: 60px; /* Move the nav down under the navbar */
+    left: 0;
+    padding: 10px 0;
+    border-top: 2px solid #ccc;
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .hamburger {
+    display: block; /* Show hamburger on small screens */
+    position: absolute;
+    right: 30px;
+    top: 15px;
+  }
+}

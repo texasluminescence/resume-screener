@@ -1,16 +1,32 @@
-import logo from './images/image.png';
-import { Routes, Route, Link, useNavigate } from 'react-router-dom';
-import { useState } from 'react'; 
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import './css_files/AfterEnteringResume.css';
 import './css_files/components.css';
 import './css_files/font.css';
 import './css_files/index.css';
 import './css_files/styles.css';
-import Results from './Results'; // Import the Results component
-import * as ReactBootStrap from 'react-bootstrap'; 
-import React from 'react';
+import logo from './images/image.png';
+import Results from './Results';
+import Footer from './components/Footer';
+import Navbar from './components/Navbar';
 
-// DragDropResume Function
+const buttonStyle = {
+  backgroundColor: '#FFF',
+  color: '#000',
+  border: '1px solid #000',
+  padding: '8px 16px',
+  cursor: 'pointer',
+  borderRadius: '6px',
+  transition: 'background-color 0.3s, color 0.3s',
+  marginLeft: '10px',
+};
+
+const buttonHoverStyle = {
+  backgroundColor: '#000',
+  color: '#FFF',
+};
+
 function DragDropResume({ loading, handleUploadClick }) {
   const [isDragging, setIsDragging] = useState(false);
 
@@ -34,45 +50,44 @@ function DragDropResume({ loading, handleUploadClick }) {
   };
 
   return (
-    <div className="flex-col-center-center heroactions">
-      {loading && (
-        <div className="loading-overlay">
-          <ReactBootStrap.Spinner animation="border" />
-        </div>
-      )}
+    <div className="drag-drop-wrapper" style={{ textAlign: 'center', padding: '40px'}}>
+      <h1 style={{ fontSize: '36px', fontWeight: 'bold', color: '#2C3E50' }}>Welcome to CV Revive</h1>
+      <p style={{ fontSize: '18px', color: '#34495E' }}>Optimize your resume with AI-powered tools and land your dream job!</p>
       <div
-        className={`drag-drop-area ui border-dashed round ${isDragging ? 'dragging' : ''}`}
+        className={`drag-drop-area ${isDragging ? 'dragging' : ''}`}
         onDragOver={(e) => e.preventDefault()}
         onDragEnter={handleDragEnter}
         onDragLeave={handleDragLeave}
         onDrop={handleFileDrop}
         style={{
-          width: '50%',
-          height: '300px',
-          border: `2px dashed ${isDragging ? '#FF0000' : '#FF4B4B'}`, 
-          borderRadius: '8px',
-          backgroundColor: isDragging ? '#FFECEC' : '#FFF5F5',
+          width: '60%',
+          height: '350px',
+          border: `2px dashed ${isDragging ? '#C70039' : '#000'}`,
+          borderRadius: '12px',
+          backgroundColor: isDragging ? '#F8D7DA' : '#FFF',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           flexDirection: 'column',
-          margin: '20px auto',
+          margin: '30px auto',
         }}
       >
-        <p style={{ color: '#333', fontSize: '16px', fontWeight: 'bold' }}>
+        <h3 style={{ color: '#333', fontSize: '20px', fontWeight: 'bold' }}>
           Drag and drop your resume here
-        </p>
-        <p style={{ color: '#333', fontSize: '14px' }}>or</p>
+        </h3>
+        <p style={{ color: '#555', fontSize: '14px' }}>or</p>
         <label
-          className="button--upload ui button blue_gray_900 size-sm fill round"
+          className="button--upload"
           style={{
-            backgroundColor: '#FF4B4B',
-            color: '#FFF',
-            padding: '10px 20px',
+            backgroundColor: '#FFF',
+            color: '#000',
+            border: '1px solid #000',
+            padding: '10px 25px',
             fontSize: '16px',
             fontWeight: 'bold',
-            borderRadius: '5px',
+            borderRadius: '8px',
             cursor: 'pointer',
+            transition: 'background-color 0.3s, color 0.3s',
           }}
         >
           <input
@@ -89,16 +104,16 @@ function DragDropResume({ loading, handleUploadClick }) {
 }
 
 function App() {
-  const [loading, setLoading] = useState(false); 
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleUploadClick = async (event) => {
     const file = event.target.files[0];
-    if (!file) return; 
+    if (!file) return;
 
-    const formData = new FormData(); 
-    formData.append('file', file); 
-    setLoading(true); 
+    const formData = new FormData();
+    formData.append('file', file);
+    setLoading(true);
 
     try {
       const response = await fetch('http://localhost:8080/upload', {
@@ -114,55 +129,18 @@ function App() {
       console.log('Server response:', data);
       setLoading(false);
       navigate("/results");
-      
+
     } catch (error) {
       console.error('Upload error:', error);
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
   return (
-    <div className="columnheader_logo-one">
-      <header className="header">
-        <div className="header_top-row">
-          <div className="header__navigation">
-            <ul className="header__menu">
-              <li>
-                <Link to="/" className="menu-item-resume-link">
-                  <img 
-                    src={logo} 
-                    alt="Resume Scanner Logo" 
-                    className="header__logo"
-                  />
-                </Link>
-              </li>
-              <div className="header__menu-items">
-                <li>
-                  <Link to="/examples">
-                    <p className="ui text size-textxs">Example Resumes</p>
-                  </Link>
-                </li>
-                <li>
-                  <Link to="/tips">
-                    <p className="ui text size-textxs">Tips</p>
-                  </Link>
-                </li>
-                <li>
-                  <button className="header____auth-button ui button gray_300 size-xs fill round">
-                    Sign in
-                  </button>
-                </li>
-                <li>
-                  <button className="header____auth-button-1 ui button blue_gray_900 size-xs fill round">
-                    Register
-                  </button>
-                </li>
-              </div>
-            </ul>
-          </div>
-        </div>
-      </header>
+    <div className="main-container" style={{ backgroundColor: '#F4F4F4', marginBottom: '0' }}>
+      <Navbar /> {/* Add the Navbar component here */}
       <DragDropResume loading={loading} handleUploadClick={handleUploadClick} />
+      <Footer /> {/* Add the Footer component here */}
     </div>
   );
 }
@@ -171,7 +149,7 @@ export default function MainApp() {
   return (
     <Routes>
       <Route path="/" element={<App />} />
-      <Route path="/results" element={<Results />} /> 
+      <Route path="/results" element={<Results />} />
     </Routes>
   );
 }
