@@ -144,3 +144,7 @@
     top: 15px;
   }
 }
+/* In Navbar.css */
+.logo {
+  color: black; /* Set text color to black */
+}

@@ -14,8 +14,11 @@ function Navbar() {
     <header className="navbar">
       <div className="navbar-container">
         <div className="logo-container">
-          <img src={logo} alt="Logo" className="logo-img" />
-          <div className="logo">CV Revive</div>
+          {/* Logo and Project Name as Link */}
+          <Link to="/" className="logo-link">
+            <img src={logo} alt="Logo" className="logo-img" />
+            <div className="logo">CV Revive</div>
+          </Link>
         </div>
         
         {/* Hamburger Icon */}
