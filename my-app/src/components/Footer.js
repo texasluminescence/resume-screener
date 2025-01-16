@@ -1,5 +1,5 @@
 import React from 'react';
-import './Footer.css'; // Make sure this file is in the same folder as Footer.js
+import './Footer.css'; // Ensure this file is in the same folder as Footer.js
 
 function Footer() {
   return (
@@ -32,6 +32,14 @@ function Footer() {
                 className="footer-link"
               >
                 AI Resume Screener
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://texasluminescence.org/resume-guide/"
+                className="footer-link"
+              >
+                Resume Guide
               </a>
             </li>
           </ul>
