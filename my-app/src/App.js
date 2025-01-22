@@ -11,6 +11,8 @@ import Results from './Results';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Spinner from 'react-bootstrap/Spinner';
+import { Authenticator } from '@aws-amplify/ui-react';
+import SignIn from './pages/SignIn';
 
 const buttonStyle = {
   backgroundColor: '#FFF',
@@ -179,11 +181,14 @@ function App() {
   );
 }
 
-export default function MainApp() {
+function MainApp() {
   return (
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="/results" element={<Results />} />
+      <Route path="/signin" element={<SignIn />} />
     </Routes>
   );
 }
+
+export default MainApp;

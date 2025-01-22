@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuthenticator } from '@aws-amplify/ui-react';
 import './Navbar.css';
-import logo from '../images/image.png'; // Update path as needed
+import logo from '../images/image.png';
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, signOut } = useAuthenticator((context) => [context.user]);
+  const navigate = useNavigate();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -21,7 +24,6 @@ function Navbar() {
           </Link>
         </div>
         
-        {/* Hamburger Icon */}
         <button className="hamburger" onClick={toggleMenu}>
           ☰
         </button>
@@ -29,8 +31,36 @@ function Navbar() {
         <nav className={`nav-links ${isOpen ? 'open' : ''}`}>
           <Link to="/examples" className="nav-link">Example Resumes</Link>
           <Link to="/story" className="nav-link">Our Story</Link>
-          <button className="nav-btn">Sign In</button>
-          <button className="nav-btn">Register</button>
+          {user ? (
+            <button 
+              onClick={signOut}
+              style={{
+                padding: '8px 16px',
+                backgroundColor: '#f44336',
+                color: 'white',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer'
+              }}
+            >
+              Sign Out
+            </button>
+          ) : (
+            <button 
+              onClick={() => navigate('/signin')}
+              className="nav-btn"
+              style={{
+                padding: '8px 16px',
+                backgroundColor: '#4CAF50',
+                color: 'white',
+                border: 'none',
+                borderRadius: '4px',
+                cursor: 'pointer'
+              }}
+            >
+              Sign In
+            </button>
+          )}
         </nav>
       </div>
     </header>
