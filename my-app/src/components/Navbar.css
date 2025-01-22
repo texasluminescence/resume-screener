@@ -101,6 +101,8 @@
 
 .nav-btn {
   background-color: transparent;
+  color: black;
+  text-decoration: none;
   border: 1px solid #000;
   padding: 8px 16px;
   cursor: pointer;

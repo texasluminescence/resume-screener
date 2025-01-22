@@ -29,8 +29,9 @@ function Navbar() {
         <nav className={`nav-links ${isOpen ? 'open' : ''}`}>
           <Link to="/examples" className="nav-link">Example Resumes</Link>
           <Link to="/story" className="nav-link">Our Story</Link>
-          <button className="nav-btn">Sign In</button>
-          <button className="nav-btn">Register</button>
+
+          <Link to="/signin" className="nav-btn"> Sign In </Link>
+          <Link to="/register" className="nav-btn"> Register </Link>
         </nav>
       </div>
     </header>

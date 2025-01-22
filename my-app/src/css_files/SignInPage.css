@@ -1,0 +1,55 @@
+/* SignInPage.css */
+.signin-wrapper {
+    max-width: 400px;
+    margin: 40px auto;    /* Centers the form on the page and adds top spacing */
+    padding: 20px;
+    /* background-color: #f9f9f9;   Uncomment if you want a light background */
+    /* border: 1px solid #ccc;      Uncomment if you want a border around the form */
+    /* border-radius: 6px;         Uncomment for rounded corners */
+  }
+  
+  .signin-title {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  
+  .signin-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .signin-label {
+    font-size: 1.1rem;
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+  
+  .signin-input {
+    font-size: 1rem;
+    padding: 0.6rem;
+    margin-bottom: 1.2rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .signin-input:focus {
+    outline: none;
+    border-color: #007BFF; /* highlight color on focus */
+  }
+  
+  .signin-button {
+    font-size: 1rem;
+    padding: 0.6rem;
+    background-color: #007BFF;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    /* Adjust hover color to taste */
+  }
+  
+  .signin-button:hover {
+    background-color: #0056b3;
+  }
+  
