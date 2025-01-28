@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
 import './css_files/AfterEnteringResume.css';
@@ -13,6 +13,8 @@ import Navbar from './components/Navbar';
 import Spinner from 'react-bootstrap/Spinner';
 import { Authenticator, useAuthenticator } from '@aws-amplify/ui-react';
 import SignIn from './pages/SignIn';
+import BulkUploadPreview from './BulkUploadPreview';
+import { Document, Page } from 'react-pdf';
 
 const buttonStyle = {
   backgroundColor: '#FFF',
@@ -39,6 +41,13 @@ function DragDropResume({ loading, handleSingleFileUpload }) {
   //bulk
   const [bulkUpload, setBulkUpload] = useState(false);
   const [bulkFiles, setBulkFiles] = useState([]);
+
+  useEffect(() => {
+    if (!user) {
+      setBulkUpload(false);
+      setBulkFiles([]);
+    }
+  }, [user]);
 
 
   const handleDragEnter = (e) => {
@@ -169,16 +178,7 @@ function DragDropResume({ loading, handleSingleFileUpload }) {
       </div>
       {/* Show the list of bulk files (only if bulk is enabled) */}
       {bulkUpload && bulkFiles.length > 0 && (
-        <div style={{ marginTop: '20px' }}>
-          <h2>Uploaded Files (not yet analyzed):</h2>
-          <ul style={{ listStyleType: 'none', padding: 0 }}>
-            {bulkFiles.map((file, idx) => (
-              <li key={idx} style={{ margin: '6px 0' }}>
-                {file.name}
-              </li>
-            ))}
-          </ul>
-        </div>
+        <BulkUploadPreview bulkFiles={bulkFiles} />
       )}
     </div>
     
