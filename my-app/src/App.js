@@ -11,7 +11,7 @@ import Results from './Results';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
 import Spinner from 'react-bootstrap/Spinner';
-import { Authenticator } from '@aws-amplify/ui-react';
+import { Authenticator, useAuthenticator } from '@aws-amplify/ui-react';
 import SignIn from './pages/SignIn';
 
 const buttonStyle = {
@@ -30,8 +30,16 @@ const buttonHoverStyle = {
   color: '#FFF',
 };
 
-function DragDropResume({ loading, handleUploadClick }) {
+function DragDropResume({ loading, handleSingleFileUpload }) {
   const [isDragging, setIsDragging] = useState(false);
+
+  //track if we are signed in
+  const { user } = useAuthenticator((context) => [context.user]);
+
+  //bulk
+  const [bulkUpload, setBulkUpload] = useState(false);
+  const [bulkFiles, setBulkFiles] = useState([]);
+
 
   const handleDragEnter = (e) => {
     e.preventDefault();
@@ -46,16 +54,67 @@ function DragDropResume({ loading, handleUploadClick }) {
   const handleFileDrop = (e) => {
     e.preventDefault();
     setIsDragging(false);
-    const files = e.dataTransfer.files;
-    if (files && files.length > 0) {
-      handleUploadClick({ target: { files } });
+    const droppedFiles = e.dataTransfer.files;
+    if (!droppedFiles || droppedFiles.length == 0)
+    {
+      return;
     }
+    
+    if (!user)
+    {
+      //not signed in, do what was before
+      handleSingleFileUpload(droppedFiles[0]);
+    } else if (bulkUpload)
+    {
+      //bulk upload turned on
+      setBulkFiles((prev) => [...prev, ...Array.from(droppedFiles)]);
+    }
+    else
+    {
+      //bulk upload turned off
+      handleSingleFileUpload(droppedFiles[0]);
+    }
+  };
+
+  const handleFileSelect = (e) => {
+    const selectedFiles = e.target.files;
+    if (!selectedFiles || selectedFiles.length === 0) return;
+
+    if (!user)
+      {
+        //not signed in, do what was before
+        handleSingleFileUpload(selectedFiles[0]);
+      } else if (bulkUpload)
+      {
+        //bulk upload turned on
+        setBulkFiles((prev) => [...prev, ...Array.from(selectedFiles)]);
+      }
+      else
+      {
+        //bulk upload turned off
+        handleSingleFileUpload(selectedFiles[0]);
+      }
   };
 
   return (
     <div className="drag-drop-wrapper" style={{ textAlign: 'center', padding: '40px'}}>
       <h1 style={{ fontSize: '36px', fontWeight: 'bold', color: '#2C3E50' }}>Welcome to CV Revive</h1>
       <p style={{ fontSize: '18px', color: '#34495E' }}>Optimize your resume with AI-powered tools and land your dream job!</p>
+      {/* Only show the “Enable Bulk Upload” toggle if the user is signed in */}
+      {user && (
+        <div style={{ marginBottom: '1rem' }}>
+          <label style={{ fontSize: '16px', fontWeight: '600' }}>
+            <input
+              type="checkbox"
+              checked={bulkUpload}
+              onChange={() => setBulkUpload(!bulkUpload)}
+              style={{ marginRight: '8px' }}
+            />
+            Enable Bulk Upload
+          </label>
+        </div>
+      )}
+
       <div
         className={`drag-drop-area ${isDragging ? 'dragging' : ''}`}
         onDragOver={(e) => e.preventDefault()}
@@ -96,13 +155,34 @@ function DragDropResume({ loading, handleUploadClick }) {
           <input
             type="file"
             className="hide-input"
-            onChange={handleUploadClick}
+            onChange={handleFileSelect}
             style={{ display: 'none' }}
+
+            // If user toggles "bulkUpload" -> allow multiple files,
+            // plus allow folder selection with webkitdirectory
+            multiple={bulkUpload}
+            directory={bulkUpload ? '' : undefined}
+            webkitdirectory={bulkUpload ? '' : undefined}
           />
-          Select a file
+          {bulkUpload ? 'Select a folder' : 'Select a file'}
         </label>
       </div>
+      {/* Show the list of bulk files (only if bulk is enabled) */}
+      {bulkUpload && bulkFiles.length > 0 && (
+        <div style={{ marginTop: '20px' }}>
+          <h2>Uploaded Files (not yet analyzed):</h2>
+          <ul style={{ listStyleType: 'none', padding: 0 }}>
+            {bulkFiles.map((file, idx) => (
+              <li key={idx} style={{ margin: '6px 0' }}>
+                {file.name}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
+    
+    
   );
 }
 
@@ -111,8 +191,7 @@ function App() {
   const [fileData, setFileData] = useState(null);
   const navigate = useNavigate();
 
-  const handleUploadClick = async (event) => {
-    const file = event.target.files[0];
+  const handleSingleFileUpload = async (file) => {
     if (!file) return;
 
     const formData = new FormData();
@@ -173,7 +252,7 @@ function App() {
     
     <div className="main-container" style={{ backgroundColor: '#F4F4F4', marginBottom: '0' }}>
       <Navbar /> {/* Add the Navbar component here */}
-      <DragDropResume loading={loading} handleUploadClick={handleUploadClick}>
+      <DragDropResume loading={loading} handleSingleFileUpload={handleSingleFileUpload}>
       </DragDropResume>
       <Footer /> {/* Add the Footer component here */}
     </div>
