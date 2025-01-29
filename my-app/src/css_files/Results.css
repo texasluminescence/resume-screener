@@ -1,10 +1,12 @@
 .results-content {
-  padding: 20px;
   max-width: 1800px;  /* Increased from 1400px */
   margin: 0 auto;
   display: flex;
-  gap: 40px;         /* Increased from 20px */
   align-items: flex-start;
+}
+
+.results-giant-container {
+  margin-top: 20px; 
 }
 
 .heroactions2 {
@@ -57,6 +59,7 @@
 .resume-preview {
   flex: 0.8;        /* Changed from 1 to make it slightly narrower */
   max-width: 45%;   /* Changed from 50% */
+  min-width: 0; 
   margin: 0;
   padding: 20px;
   background: white;
@@ -101,5 +104,31 @@
 .border-gray-200 {
   border-color: #e5e7eb;
 }
+
+.custom-accordion .accordion-item {
+  margin: 0 !important; /* Remove spacing */
+}
+
+.custom-accordion .accordion-header {
+  margin: 0; /* Ensure headers have no space */
+}
+
+
+.accordion-body {
+  display: flex;
+  flex-direction: row; /* Ensure the children are side by side */
+  gap: 20px; /* Add some spacing between the objects */
+  align-items: flex-start; /* Align items at the top */
+}
+
+.accordion-item {
+  margin: 0 !important; /* Remove the default margin between accordion items */
+}
+
+.accordion-button {
+  border-radius: 0; /* Ensure buttons have no gaps due to rounded corners */
+}
+
+
 
 /* Add other necessary styles */

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "./css_files/Results.css";
+import "../css_files/Results.css";
 
 const MatrixRubric = ({ initialSelections = {} }) => {
   const [selections, setSelections] = useState(initialSelections);

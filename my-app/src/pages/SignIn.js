@@ -1,5 +1,6 @@
 import React from 'react';
 import { Authenticator } from '@aws-amplify/ui-react';
+import "./Signin.css";
 import { useNavigate } from 'react-router-dom';
 
 function SignIn() {
