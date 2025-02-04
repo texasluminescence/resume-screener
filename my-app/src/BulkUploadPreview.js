@@ -1,14 +1,18 @@
 // BulkUploadPreview.js
 import React, { useState } from 'react';
-import PDFPreview from './PDFPreview';
+import PDFPreview from './PDFPreview'; // or use react-pdf directly
 
-function BulkUploadPreview({ bulkFiles }) {
-  const [selectedFile, setSelectedFile] = useState(null);
+export default function BulkUploadPreview({ bulkFiles }) {
+  const [selectedFile, setSelectedFile] = useState(bulkFiles[0] || null);
 
+  if (bulkFiles.length === 1) {
+    // Exactly one file => just show the preview, no heading or list
+    return <PDFPreview file={bulkFiles[0]} />;
+  } else {
   return (
-    <div style={{ marginTop: '20px' }}>
+    <div>
       <h2>Uploaded Files (not yet analyzed):</h2>
-      <ul style={{ listStyleType: 'none', padding: 0 }}>
+      <ul style={{ listStyle: 'none', padding: 0 }}>
         {bulkFiles.map((file, idx) => (
           <li
             key={idx}
@@ -20,11 +24,8 @@ function BulkUploadPreview({ bulkFiles }) {
         ))}
       </ul>
 
-      {selectedFile && (
-        <PDFPreview file={selectedFile} />
-      )}
+      {selectedFile && <PDFPreview file={selectedFile} />}
     </div>
   );
 }
-
-export default BulkUploadPreview;
+}
