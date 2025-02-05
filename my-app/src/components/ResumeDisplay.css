@@ -1,0 +1,23 @@
+.resume-preview {
+  flex: 0.8;        /* Changed from 1 to make it slightly narrower */
+  max-width: 100%;   /* Changed from 50% */
+  min-width: 0; 
+  max-height: 550px;
+  margin: 0;
+  padding: 20px;
+  background: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.resume-preview canvas {
+  width: 100% !important;
+  height: auto !important;
+}
+
+.resume-image {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}

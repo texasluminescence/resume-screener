@@ -74,7 +74,7 @@ const MatrixRubric = ({ initialSelections = {} }) => {
   };
 
   return (
-    <div className="w-full max-w-6xl mx-auto p-4">
+    <div className="w-full max-w-6xl mx-auto">
       <div className="bg-white rounded-lg shadow-lg">
         <div className="p-4 bg-gray-50 border-b">
           <h2 className="text-xl font-semibold">

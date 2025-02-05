@@ -105,30 +105,4 @@
   border-color: #e5e7eb;
 }
 
-.custom-accordion .accordion-item {
-  margin: 0 !important; /* Remove spacing */
-}
 
-.custom-accordion .accordion-header {
-  margin: 0; /* Ensure headers have no space */
-}
-
-
-.accordion-body {
-  display: flex;
-  flex-direction: row; /* Ensure the children are side by side */
-  gap: 20px; /* Add some spacing between the objects */
-  align-items: flex-start; /* Align items at the top */
-}
-
-.accordion-item {
-  margin: 0 !important; /* Remove the default margin between accordion items */
-}
-
-.accordion-button {
-  border-radius: 0; /* Ensure buttons have no gaps due to rounded corners */
-}
-
-
-
-/* Add other necessary styles */
