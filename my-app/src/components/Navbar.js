@@ -19,7 +19,7 @@ function Navbar() {
         <div className="logo-container">
           {/* Logo and Project Name as Link */}
           <Link to="/" className="logo-link">
-            <img src={logo} alt="Logo" className="logo-img" />
+            <img src={logo} alt="Logo" className="logo-img"/>
             <div className="logo">CV Revive</div>
           </Link>
         </div>
@@ -36,7 +36,7 @@ function Navbar() {
               onClick={signOut}
               style={{
                 padding: '8px 16px',
-                backgroundColor: '#f44336',
+                backgroundColor: '#000000',
                 color: 'white',
                 border: 'none',
                 borderRadius: '4px',
@@ -51,7 +51,7 @@ function Navbar() {
               className="nav-btn"
               style={{
                 padding: '8px 16px',
-                backgroundColor: '#4CAF50',
+                backgroundColor: '#000000',
                 color: 'white',
                 border: 'none',
                 borderRadius: '4px',

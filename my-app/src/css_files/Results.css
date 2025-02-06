@@ -1,10 +1,12 @@
 .results-content {
-  padding: 20px;
   max-width: 1800px;  /* Increased from 1400px */
   margin: 0 auto;
   display: flex;
-  gap: 40px;         /* Increased from 20px */
   align-items: flex-start;
+}
+
+.results-giant-container {
+  margin-top: 20px; 
 }
 
 .heroactions2 {
@@ -57,6 +59,7 @@
 .resume-preview {
   flex: 0.8;        /* Changed from 1 to make it slightly narrower */
   max-width: 45%;   /* Changed from 50% */
+  min-width: 0; 
   margin: 0;
   padding: 20px;
   background: white;
@@ -102,4 +105,4 @@
   border-color: #e5e7eb;
 }
 
-/* Add other necessary styles */
+

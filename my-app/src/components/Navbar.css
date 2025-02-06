@@ -25,7 +25,8 @@
 .logo-img {
   width: 70px; /* Increased logo size */
   height: 70px; /* Keep the height consistent */
-  margin-right: 10px;
+  margin-right: 5px; 
+  margin-left: 0px; 
 }
 
 .logo {

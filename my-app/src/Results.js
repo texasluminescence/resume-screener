@@ -4,9 +4,13 @@ import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
 import './css_files/Results.css';
-import MatrixRubric from "./MatrixRubric.js";
+import MatrixRubric from "./components/MatrixRubric.js";
 import Navbar from './components/Navbar.js';
 import Footer from './components/Footer.js'; 
+import ButtonHeader from "./components/ButtonHeader.js"; 
+import ResumeDisplay from './components/ResumeDisplay.js';
+import ResumeMenu from './components/ResumeMenu.js'; 
+import { Container, Row, Col } from 'react-bootstrap';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/3.6.172/pdf.worker.min.js`;
 
@@ -44,31 +48,28 @@ const Results = () => {
       {/* Navbar Section */}
       <Navbar />
 
-      {/* Main Content Section */}
-      <div className="results-content">
-        <div className="resume-preview">
-          {pdfUrl ? (
-            <Document
-              file={pdfUrl}
-              onLoadSuccess={onDocumentLoadSuccess}
-              onLoadError={onDocumentLoadError}
-              loading="Loading PDF..."
-            >
-              <Page 
-                pageNumber={1} 
-                scale={1.5}
-                renderTextLayer={false}
-                renderAnnotationLayer={false}
-              />
-            </Document>
-          ) : (
-            <p>No PDF file available to preview</p>
-          )}
-        </div>
-        <div className="matrix-container">
-          <MatrixRubric initialSelections={initialSelections}/>
-        </div>
+      <ButtonHeader></ButtonHeader>
+      <div className="results-giant-container">
+        <Container fluid>
+        <Row>
+          <Col  md={4} lg={2}>
+            <ResumeMenu></ResumeMenu>
+          </Col>
+          <Col className="d-flex justify-content-center w-100">
+            <ResumeDisplay></ResumeDisplay>
+          </Col>
+          <Col  lg={5} >
+            <MatrixRubric></MatrixRubric>
+          </Col>
+        </Row>
+        </Container>
       </div>
+
+
+
+
+      
+
 
       {/* Footer Section */}
       <Footer />

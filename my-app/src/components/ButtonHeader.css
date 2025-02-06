@@ -1,0 +1,20 @@
+.custom-list-item {
+  border-radius: 0px; /* Adjust for smoother edges */
+  padding: 10px 20px;
+  width: 600px; /* Adjust as needed */
+  text-align: center;
+  background-color: #f8f9fa; /* Match Bootstrap's light gray */
+  border: 1px solid #ced4da;
+}
+
+.custom-button-item {
+  border-radius: 0px !important; /* Adjust for smoother edges */
+}
+
+
+
+.button-header-container {
+  display: flex; 
+  justify-content: center; 
+  margin-top: 20px; 
+}
