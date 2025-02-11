@@ -181,10 +181,29 @@ function DragDropResume({ handleAnalyzeFiles }) {
       {hasFiles && (
         <div style={{ marginTop: '2rem' }}>
           <BulkUploadPreview bulkFiles={uploadedFiles} />
-
-          
         </div>
       )}
+      {/* ─────────────────────────────────────────────────────────────────────
+          2) NEW: A SCROLLABLE TEXT AREA TO PASTE RESUME TEXT
+         ───────────────────────────────────────────────────────────────────── */}
+      {user && !hasFiles && (
+    <div style={{ marginTop: '2rem', width: '60%', margin: '0 auto' }}>
+      <h2 style={{ marginBottom: '0.5rem', textAlign: 'left' }}>Or paste your resume text here:</h2>
+      <textarea
+        placeholder="Type or paste your resume text..."
+        style={{
+          width: '100%',
+          height: '200px',
+          padding: '10px',
+          fontSize: '16px',
+          border: '1px solid #ccc',
+          borderRadius: '6px',
+          resize: 'vertical',
+          overflowY: 'auto',
+        }}
+      />
+    </div>
+  )}
     </div>
   );
 }
