@@ -150,7 +150,7 @@ function DragDropResume({ handleAnalyzeFiles }) {
         </div>
       )}
 
-      {/* After uploading files */}
+      {/* Analyze Button */}
       {!pasteMode && hasFiles && (
         <>
           <button
@@ -170,9 +170,58 @@ function DragDropResume({ handleAnalyzeFiles }) {
             {uploadedFiles.length === 1 ? 'Analyze' : 'Analyze All'}
           </button>
 
-          <div style={{ marginTop: '2rem' }}>
+          
+        </>
+      )}
+
+    {!pasteMode && uploadedFiles.length == 1 && (
+        <>
+          <button
+            //onClick={function for Generating Resume}
+            style={{
+              display: 'block',
+              margin: '20px auto',
+              padding: '10px 20px',
+              backgroundColor: '#000',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              fontSize: '16px',
+            }}
+          >
+            Generate
+          </button>
+        </>
+      )}
+      {!pasteMode && hasFiles &&
+      (
+        <div style={{ marginTop: '2rem' }}>
             <BulkUploadPreview bulkFiles={uploadedFiles} />
           </div>
+      )}
+      
+
+
+    
+      {pasteMode && (
+        <>
+          <button
+            //onClick={function for Generating Resume}
+            style={{
+              display: 'block',
+              margin: '20px auto',
+              padding: '10px 20px',
+              backgroundColor: '#000',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              fontSize: '16px',
+            }}
+          >
+            Generate
+          </button>
         </>
       )}
 
