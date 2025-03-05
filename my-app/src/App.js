@@ -12,10 +12,12 @@ import Spinner from 'react-bootstrap/Spinner';
 import { Authenticator, useAuthenticator } from '@aws-amplify/ui-react';
 import SignIn from './pages/SignIn';
 import BulkUploadPreview from './BulkUploadPreview';
+import GeneratePage from './GeneratePage';
 import { Document, Page } from 'react-pdf';
 
 function DragDropResume({ handleAnalyzeFiles }) {
   const { user } = useAuthenticator((context) => [context.user]);
+  const navigate = useNavigate();
 
   // either paste or file upload
   const [pasteMode, setPasteMode] = useState(false);
@@ -177,7 +179,9 @@ function DragDropResume({ handleAnalyzeFiles }) {
     {!pasteMode && uploadedFiles.length == 1 && (
         <>
           <button
-            //onClick={function for Generating Resume}
+            onClick={() => {
+              navigate('/generate', { state: { files: uploadedFiles } });
+            }}
             style={{
               display: 'block',
               margin: '20px auto',
@@ -202,8 +206,6 @@ function DragDropResume({ handleAnalyzeFiles }) {
       )}
       
 
-
-    
       {pasteMode && (
         <>
           <button
@@ -280,6 +282,7 @@ function App() {
   };
 
   const handleSingleFileUpload = async (file) => {
+    
     if (!file) return;
     setLoading(true);
 
@@ -354,6 +357,7 @@ function MainApp() {
     <Routes>
       <Route path="/" element={<App />} />
       <Route path="/results" element={<Results />} />
+      <Route path="/generate" element={<GeneratePage />} />
       <Route path="/signin" element={<SignIn />} />
     </Routes>
   );
