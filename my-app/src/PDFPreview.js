@@ -1,8 +1,14 @@
-import React, { useState } from 'react';
+// PDFPreview.js
+import React, { useState, useMemo } from 'react';
 import { Document, Page } from 'react-pdf';
 
 function PDFPreview({ file }) {
   const [numPages, setNumPages] = useState(null);
+
+  // Create the Object URL once per file
+  const fileUrl = useMemo(() => {
+    return URL.createObjectURL(file);
+  }, [file]);
 
   function onDocumentLoadSuccess(pdf) {
     setNumPages(pdf.numPages);
@@ -13,22 +19,18 @@ function PDFPreview({ file }) {
   return (
     <div
       style={{
-        // Center the preview as before
         width: '90%',
         maxWidth: '1200px',
         margin: '2rem auto',
       }}
     >
-      {/* Outer wrapper for border/background */}
       <div
         style={{
           border: '1px solid #ccc',
           backgroundColor: '#f8f8f8',
-          // position: 'relative' so we can do sticky heading inside
           position: 'relative',
         }}
       >
-        {/* Sticky heading so it doesn't scroll off screen */}
         <h3
           style={{
             position: 'sticky',
@@ -43,16 +45,15 @@ function PDFPreview({ file }) {
           Preview of: {file.name}
         </h3>
 
-        {/* Scrollable container for the pages */}
         <div
           style={{
-            maxHeight: '85vh',    // large vertical space
-            overflowY: 'auto',    // scroll
+            maxHeight: '85vh',
+            overflowY: 'auto',
             padding: '1rem',
           }}
         >
           <Document
-            file={URL.createObjectURL(file)}
+            file={fileUrl}
             onLoadSuccess={onDocumentLoadSuccess}
             loading={<p>Loading PDF...</p>}
             noData={<p>No PDF file specified</p>}
@@ -63,13 +64,11 @@ function PDFPreview({ file }) {
                   key={`page_${i + 1}`}
                   style={{
                     display: 'flex',
-                    justifyContent: 'center',  // center horizontally
+                    justifyContent: 'center',
                     margin: '1rem 0',
                   }}
                 >
-                  {/* Make the pages bigger by increasing width or using scale */}
                   <Page pageNumber={i + 1} width={900} />
-                  {/* or e.g.: <Page pageNumber={i + 1} scale={1.25} /> */}
                 </div>
               ))
             }
@@ -80,4 +79,5 @@ function PDFPreview({ file }) {
   );
 }
 
-export default PDFPreview;
+// Also wrap in React.memo to skip re-render if 'file' hasn't changed
+export default React.memo(PDFPreview);

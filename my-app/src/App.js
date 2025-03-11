@@ -176,7 +176,8 @@ function DragDropResume({ handleAnalyzeFiles }) {
         </>
       )}
 
-    {!pasteMode && uploadedFiles.length == 1 && (
+    {/* Generate Button -> only on pdf and signed in */}
+    {user && !pasteMode && uploadedFiles.length == 1 && (
         <>
           <button
             onClick={() => {
@@ -209,7 +210,9 @@ function DragDropResume({ handleAnalyzeFiles }) {
       {pasteMode && (
         <>
           <button
-            //onClick={function for Generating Resume}
+            onClick={() => {
+              navigate('/generate', { state: { files: uploadedFiles } });
+            }}
             style={{
               display: 'block',
               margin: '20px auto',
@@ -243,9 +246,6 @@ function DragDropResume({ handleAnalyzeFiles }) {
             boxSizing: 'border-box',
           }}
         >
-          <h2 style={{ margin: '0 0 0.5rem 0', textAlign: 'left' }}>
-            Paste your resume text here:
-          </h2>
 
           <textarea
             placeholder="Type or paste your resume text..."

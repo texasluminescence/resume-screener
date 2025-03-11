@@ -17,7 +17,10 @@ export default function GeneratePage() {
   });
 
   const handleChange = (e) => {
-    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   return (
@@ -27,48 +30,87 @@ export default function GeneratePage() {
       <div style={{ padding: '40px', textAlign: 'center' }}>
         <h1>Generate Page</h1>
 
+        {/* If exactly one file is uploaded, show a preview */}
         {files.length === 1 && (
           <div style={{ margin: '2rem auto' }}>
             <BulkUploadPreview bulkFiles={files} />
           </div>
         )}
 
-        <div style={{ marginTop: '2rem', width: '50%', margin: '2rem auto', textAlign: 'left' }}>
-          <label style={{ display: 'block', marginBottom: '1rem' }}>
-            Name:
-            <input
-              type="text"
+        {/* Textareas for Name, School, Major */}
+        <div
+          style={{
+            marginTop: '2rem',
+            width: '50%',
+            margin: '2rem auto',
+            textAlign: 'left',
+          }}
+        >
+          <div style={{ marginBottom: '1rem' }}>
+            <span style={{ fontWeight: 'bold' }}>Name:</span>
+            <textarea
               name="name"
               value={formData.name}
               onChange={handleChange}
-              style={{ width: '100%', marginTop: '0.5rem' }}
               placeholder="Enter your name"
+              style={{
+                display: 'block',
+                width: '100%',
+                marginTop: '0.5rem',
+                height: '40px',
+                resize: 'vertical',
+                padding: '8px',
+                fontSize: '16px',
+                backgroundColor: '#FFF',
+                border: '1px solid #ccc',
+                borderRadius: '6px',
+              }}
             />
-          </label>
+          </div>
 
-          <label style={{ display: 'block', marginBottom: '1rem' }}>
-            School:
-            <input
-              type="text"
+          <div style={{ marginBottom: '1rem' }}>
+            <span style={{ fontWeight: 'bold' }}>School:</span>
+            <textarea
               name="school"
               value={formData.school}
               onChange={handleChange}
-              style={{ width: '100%', marginTop: '0.5rem' }}
               placeholder="Enter your school"
+              style={{
+                display: 'block',
+                width: '100%',
+                marginTop: '0.5rem',
+                height: '40px',
+                resize: 'vertical',
+                padding: '8px',
+                fontSize: '16px',
+                backgroundColor: '#FFF',
+                border: '1px solid #ccc',
+                borderRadius: '6px',
+              }}
             />
-          </label>
+          </div>
 
-          <label style={{ display: 'block', marginBottom: '1rem' }}>
-            Major:
-            <input
-              type="text"
+          <div style={{ marginBottom: '1rem' }}>
+            <span style={{ fontWeight: 'bold' }}>Major:</span>
+            <textarea
               name="major"
               value={formData.major}
               onChange={handleChange}
-              style={{ width: '100%', marginTop: '0.5rem' }}
               placeholder="Enter your major"
+              style={{
+                display: 'block',
+                width: '100%',
+                marginTop: '0.5rem',
+                height: '40px',
+                resize: 'vertical',
+                padding: '8px',
+                fontSize: '16px',
+                backgroundColor: '#FFF',
+                border: '1px solid #ccc',
+                borderRadius: '6px',
+              }}
             />
-          </label>
+          </div>
         </div>
       </div>
 
