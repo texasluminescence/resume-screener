@@ -1,0 +1,68 @@
+.sidebar {
+  position: absolute; /* Keeps it inside the wrapper */
+  z-index: 10; 
+  top: 0;
+  left: 0;
+  width: 400px;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.8);
+  color: white;
+  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.2);
+  padding: 0px;
+  overflow-y: auto; /* Enables vertical scrolling */
+  overflow-x: hidden; /* Hides horizontal scrollbar */
+  transform: translateX(-100%); /* Initially hidden */
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari: Hides scrollbar */
+}
+
+.sidebar-rectangle {
+  width: 400px;
+  height: 50px; 
+  background-color: white; 
+  color: black; 
+  transition: filter 0.3s ease-in-out;
+  outline: 1px solid black; 
+}
+
+.sidebar-rectangle:hover {
+  filter: invert(1); /* Inverts colors on hover */
+}
+
+.sidebar-footer {
+  display: flex; /* Enables flexbox */
+  justify-content: space-between; /* Puts items on opposite ends */
+  align-items: flex-end; /* Aligns them to the bottom */
+  width: 100%; /* Ensures it spans the full width */
+}
+
+.sidebar-text {
+  color: black; 
+  font-size: 40px; 
+}
+
+.sidebar-score-text {
+  color: black; 
+  font-size: 16px; 
+}
+
+
+.custom-list-item {
+  border-radius: 0px; /* Adjust for smoother edges */
+  padding: 10px 20px;
+  width: 600px; /* Adjust as needed */
+  background-color: #ffffff; /* Match Bootstrap's light gray */
+  border: 1px solid #ced4da;
+}
+
+.custom-card-item {
+  border-radius: 0px; /* Adjust for smoother edges */
+  
+}
+/* Sidebar visible */
+.sidebar.open {
+  transform: translateX(0);
+}

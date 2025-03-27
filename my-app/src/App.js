@@ -135,7 +135,7 @@ function App() {
         mimeType: data.mimeType
       });
       setLoading(false);
-      navigate("/results", { state: { fileData: data.fileData, mimeType: data.mimeType } });
+      navigate("/results", { state: { fileData: data.fileData, mimeType: data.mimeType, results: data.results } });
 
     } catch (error) {
       console.error('Upload error:', error);

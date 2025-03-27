@@ -7,7 +7,7 @@ import "./ResumeDisplay.css";
 
 
 
-function ResumeDisplay() {
+function ResumeDisplay( {fileData, mimeType }) {
 
   const location = useLocation();
   const [numPages, setNumPages] = useState(null);
@@ -22,8 +22,6 @@ function ResumeDisplay() {
   function onDocumentLoadError(error) {
     console.error('Error loading PDF:', error);
   }
-  
-  const { fileData, mimeType } = location.state || {};
     // Create URL only if we have valid PDF data
   const pdfUrl = fileData && mimeType === 'application/pdf' 
     ? `data:${mimeType};base64,${fileData}`
