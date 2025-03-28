@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { Document, Page, pdfjs } from 'react-pdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
@@ -7,6 +7,8 @@ import './css_files/Results.css';
 import MatrixRubric from "./components/MatrixRubric.js";
 import Navbar from './components/Navbar.js';
 import Footer from './components/Footer.js'; 
+import ResumeMenu from './components/ResumeMenu.js'; 
+import Button from 'react-bootstrap/Button';
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/3.6.172/pdf.worker.min.js`;
 
@@ -14,6 +16,24 @@ const Results = () => {
   const location = useLocation();
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
+  const [isOpen, setIsOpen] = useState(false); 
+  const sidebarRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    }
+
+    if (isOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    } else {
+      document.removeEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [isOpen]);
 
   function onDocumentLoadSuccess({ numPages }) {
     setNumPages(numPages);
@@ -22,6 +42,14 @@ const Results = () => {
 
   function onDocumentLoadError(error) {
     console.error('Error loading PDF:', error);
+  }
+
+  function toggleSidebar () {
+    if(isOpen) {
+      setIsOpen(false); 
+    } else {
+      setIsOpen(true); 
+    }
   }
 
   const { fileData, mimeType } = location.state || {};
@@ -46,6 +74,8 @@ const Results = () => {
 
       {/* Main Content Section */}
       <div className="results-content">
+        <Button onClick={toggleSidebar}>View All Resumes</Button>
+        <ResumeMenu isOpen ={isOpen} sidebarRef = {sidebarRef}></ResumeMenu>
         <div className="resume-preview">
           {pdfUrl ? (
             <Document

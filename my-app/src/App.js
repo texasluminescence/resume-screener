@@ -14,6 +14,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import { Authenticator, useAuthenticator } from '@aws-amplify/ui-react';
 import SignIn from './pages/SignIn';
 import BulkUploadPreview from './BulkUploadPreview';
+import BulkResult from './BulkResult'
 import { Document, Page } from 'react-pdf';
 
 const buttonStyle = {
@@ -202,6 +203,33 @@ function App() {
     } else {
       // TODO
       //bulk backend call
+
+      setLoading(true);
+
+    try {
+      const formData = new FormData();
+      formData.append('file', files[0]);
+
+      const response = await fetch('http://localhost:8080/upload', {
+        method: 'POST',
+        body: formData,
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      setFileData({ base64Data: data.fileData, mimeType: data.mimeType });
+      setLoading(false);
+
+      //go to results
+      navigate('/bulk_results', {
+        state: { fileData: data.fileData, mimeType: data.mimeType },
+      });
+    } catch (err) {
+      console.error('Upload error:', err);
+      setLoading(false);
+    }
       
     }
   };
@@ -281,6 +309,7 @@ function MainApp() {
       <Route path="/" element={<App />} />
       <Route path="/results" element={<Results />} />
       <Route path="/signin" element={<SignIn />} />
+      <Route path="/bulk_results" element={<BulkResult />} />
     </Routes>
   );
 }
