@@ -1,0 +1,33 @@
+/* Existing .textareaField class */
+.textareaField {
+    display: block;
+    width: 100%;
+    margin-top: 0.5rem;
+    height: 40px;
+    resize: vertical;
+    padding: 8px;
+    font-size: 16px;
+    background-color: #FFF;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  /* New class for larger textareas */
+  .textareaFieldLarge {
+    display: block;
+    width: 100%;
+    margin-top: 0.5rem;
+    height: 120px; /* or however tall you want it */
+    resize: vertical;
+    padding: 8px;
+    font-size: 16px;
+    background-color: #FFF;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+  }
+  
+  /* If you have custom label styling */
+  .labelTitle {
+    font-weight: bold;
+  }
+  
