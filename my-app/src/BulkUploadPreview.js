@@ -1,14 +1,25 @@
 // BulkUploadPreview.js
-import React, { useState } from 'react';
-import PDFPreview from './PDFPreview'; // or use react-pdf directly
+import React, { useState, useEffect } from 'react';
+import PDFPreview from './PDFPreview';
 
-export default function BulkUploadPreview({ bulkFiles }) {
-  const [selectedFile, setSelectedFile] = useState(bulkFiles[0] || null);
+function BulkUploadPreview({ bulkFiles }) {
+  // Only initialize selectedFile once
+  const [selectedFile, setSelectedFile] = useState(() => bulkFiles[0] || null);
+
+  // If the parent updates `bulkFiles` (e.g. new file uploaded),
+  // ensure our selectedFile is still valid
+  useEffect(() => {
+    if (!selectedFile || !bulkFiles.includes(selectedFile)) {
+      setSelectedFile(bulkFiles[0] || null);
+    }
+  }, [bulkFiles, selectedFile]);
 
   if (bulkFiles.length === 1) {
-    // Exactly one file => just show the preview, no heading or list
+    // Exactly one file => just show the PDF preview (no list)
     return <PDFPreview file={bulkFiles[0]} />;
-  } else {
+  }
+
+  // Multiple or zero files => show clickable list + preview
   return (
     <div>
       <h2>Uploaded Files (not yet analyzed):</h2>
@@ -28,4 +39,6 @@ export default function BulkUploadPreview({ bulkFiles }) {
     </div>
   );
 }
-}
+
+// Wrap in React.memo to avoid re-renders unless `bulkFiles` actually changes
+export default React.memo(BulkUploadPreview);
