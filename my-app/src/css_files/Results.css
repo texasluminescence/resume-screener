@@ -3,6 +3,7 @@
   margin: 0 auto;
   display: flex;
   align-items: flex-start;
+  position: relative;
 }
 
 .results-giant-container {
