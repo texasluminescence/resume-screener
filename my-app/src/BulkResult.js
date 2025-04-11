@@ -15,9 +15,17 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/3
 const Results = () => {
   const location = useLocation();
   const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
+  const [pageNumber] = useState(1);
   const [isOpen, setIsOpen] = useState(false); 
   const sidebarRef = useRef(null);
+  const { files = [] } = location.state || {};
+  const [selectedResumeIndex, setSelectedResumeIndex] = useState(0);
+
+  const selectedResume = files[selectedResumeIndex];
+  const pdfUrl =
+    selectedResume && selectedResume.mimeType === 'application/pdf'
+      ? `data:${selectedResume.mimeType};base64,${selectedResume.base64Data}`
+      : null;
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -45,20 +53,8 @@ const Results = () => {
   }
 
   function toggleSidebar () {
-    if(isOpen) {
-      setIsOpen(false); 
-    } else {
-      setIsOpen(true); 
-    }
+    setIsOpen(!isOpen);
   }
-
-  const { fileData, mimeType } = location.state || {};
-  // Create URL only if we have valid PDF data
-  const pdfUrl = fileData && mimeType === 'application/pdf' 
-    ? `data:${mimeType};base64,${fileData}`
-    : null;
-
-  console.log('PDF URL created:', !!pdfUrl); // Debug log
 
   const initialSelections = {
     formatAndStyle: "Good",
@@ -69,13 +65,16 @@ const Results = () => {
 
   return (
     <div className="columnheader_logo-one">
-      {/* Navbar Section */}
       <Navbar />
-
-      {/* Main Content Section */}
       <div className="results-content">
         <Button onClick={toggleSidebar}>View All Resumes</Button>
-        <ResumeMenu isOpen ={isOpen} sidebarRef = {sidebarRef}></ResumeMenu>
+        <ResumeMenu
+          isOpen={isOpen}
+          sidebarRef={sidebarRef}
+          resumes={files}
+          onSelect={(index) => setSelectedResumeIndex(index)}
+          selectedIndex={selectedResumeIndex}
+        />
         <div className="resume-preview">
           {pdfUrl ? (
             <Document
@@ -85,7 +84,7 @@ const Results = () => {
               loading="Loading PDF..."
             >
               <Page 
-                pageNumber={1} 
+                pageNumber={pageNumber} 
                 scale={1.5}
                 renderTextLayer={false}
                 renderAnnotationLayer={false}
@@ -99,8 +98,6 @@ const Results = () => {
           <MatrixRubric initialSelections={initialSelections}/>
         </div>
       </div>
-
-      {/* Footer Section */}
       <Footer />
     </div>
   );

@@ -13,7 +13,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import { Authenticator, useAuthenticator } from '@aws-amplify/ui-react';
 import SignIn from './pages/SignIn';
 import BulkUploadPreview from './BulkUploadPreview';
-import BulkResult from './BulkResult'
+import BulkResult from './BulkResult';
 import { Document, Page } from 'react-pdf';
 import GeneratePage from './GeneratePage';
 
@@ -67,7 +67,6 @@ function DragDropResume({ handleAnalyzeFiles }) {
     setIsDragging(false);
   };
 
-  
   const handleDrop = (files) => {
     if (!files || !files.length) return;
 
@@ -94,10 +93,6 @@ function DragDropResume({ handleAnalyzeFiles }) {
 
   return (
     <div style={{ textAlign: 'center', padding: '40px' }}>
-
-      
-
-      
       {!hasFiles && (
         <>
           <h1 style={{ fontSize: '36px', fontWeight: 'bold' }}>Welcome to CV Revive</h1>
@@ -109,28 +104,27 @@ function DragDropResume({ handleAnalyzeFiles }) {
 
       {/* Radio Buttons for Mode */}
       {user && !hasFiles && (
-         <div style={{ marginBottom: '1rem' }}>
-           <label style={{ marginRight: '1rem', fontSize: '16px' }}>
-             <input
-               type="radio"
-               checked={!pasteMode}
-               onChange={() => setPasteMode(false)}
-             />{' '}
-             File Upload
-           </label>
-           <label style={{ fontSize: '16px' }}>
-             <input
-               type="radio"
-               checked={pasteMode}
-               onChange={() => setPasteMode(true)}
-               style={{ marginLeft: '8px' }}
-             />{' '}
-             Paste Resume Text
-           </label>
-         </div>
-       )}
+        <div style={{ marginBottom: '1rem' }}>
+          <label style={{ marginRight: '1rem', fontSize: '16px' }}>
+            <input
+              type="radio"
+              checked={!pasteMode}
+              onChange={() => setPasteMode(false)}
+            />{' '}
+            File Upload
+          </label>
+          <label style={{ fontSize: '16px' }}>
+            <input
+              type="radio"
+              checked={pasteMode}
+              onChange={() => setPasteMode(true)}
+              style={{ marginLeft: '8px' }}
+            />{' '}
+            Paste Resume Text
+          </label>
+        </div>
+      )}
 
-      
       {!pasteMode && user && !hasFiles && (
         <div style={{ marginBottom: '1rem' }}>
           <label style={{ fontSize: '16px', fontWeight: 600 }}>
@@ -145,7 +139,6 @@ function DragDropResume({ handleAnalyzeFiles }) {
         </div>
       )}
 
-      
       {!pasteMode && !hasFiles && (
         <div
           onDragOver={(e) => e.preventDefault()}
@@ -191,9 +184,31 @@ function DragDropResume({ handleAnalyzeFiles }) {
         </div>
       )}
 
-      
-      {hasFiles && (<button
-            onClick={() => handleAnalyzeFiles(uploadedFiles)}
+      {hasFiles && (
+        <button
+          onClick={() => handleAnalyzeFiles(uploadedFiles)}
+          style={{
+            display: 'block',
+            margin: '20px auto',
+            padding: '10px 20px',
+            backgroundColor: '#000',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '6px',
+            cursor: 'pointer',
+            fontSize: '16px',
+          }}
+        >
+          {uploadedFiles.length === 1 ? 'Analyze' : 'Analyze All'}
+        </button>
+      )}
+
+      {user && !pasteMode && uploadedFiles.length === 1 && (
+        <>
+          <button
+            onClick={() => {
+              navigate('/generate', { state: { files: uploadedFiles } });
+            }}
             style={{
               display: 'block',
               margin: '20px auto',
@@ -206,32 +221,10 @@ function DragDropResume({ handleAnalyzeFiles }) {
               fontSize: '16px',
             }}
           >
-            {uploadedFiles.length == 1 ? 'Analyze' : 'Analyze All'}
+            Generate
           </button>
+        </>
       )}
-
-      {user && !pasteMode && uploadedFiles.length == 1 && (
-         <>
-           <button
-             onClick={() => {
-              navigate('/generate', { state: { files: uploadedFiles } });
-            }}
-             style={{
-               display: 'block',
-               margin: '20px auto',
-               padding: '10px 20px',
-               backgroundColor: '#000',
-               color: '#fff',
-               border: 'none',
-               borderRadius: '6px',
-               cursor: 'pointer',
-               fontSize: '16px',
-             }}
-           >
-             Generate
-           </button>
-         </>
-       )}
 
       {hasFiles && (
         <div style={{ marginTop: '2rem' }}>
@@ -239,66 +232,64 @@ function DragDropResume({ handleAnalyzeFiles }) {
         </div>
       )}
 
-        {pasteMode && (
-         <>
-           <button
-             onClick={() => {
+      {pasteMode && (
+        <>
+          <button
+            onClick={() => {
               navigate('/generate', { state: { files: uploadedFiles } });
             }}
-             style={{
-               display: 'block',
-               margin: '20px auto',
-               padding: '10px 20px',
-               backgroundColor: '#000',
-               color: '#fff',
-               border: 'none',
-               borderRadius: '6px',
-               cursor: 'pointer',
-               fontSize: '16px',
-             }}
-           >
-             Generate
-           </button>
-         </>
-       )}
+            style={{
+              display: 'block',
+              margin: '20px auto',
+              padding: '10px 20px',
+              backgroundColor: '#000',
+              color: '#fff',
+              border: 'none',
+              borderRadius: '6px',
+              cursor: 'pointer',
+              fontSize: '16px',
+            }}
+          >
+            Generate
+          </button>
+        </>
+      )}
 
-      
-      
       {/* Paste Box */}
       {pasteMode && (
-         <div
-           style={{
-             width: '60%',
-             height: '350px',
-             border: '2px dashed #000', // same dashed border
-             borderRadius: '12px',
-             backgroundColor: '#FFF',
-             display: 'flex',
-             flexDirection: 'column',
-             margin: '30px auto',  // center horizontally
-             padding: '1rem',      // some inner padding
-             boxSizing: 'border-box',
-           }}
-         >
-           <h2 style={{ margin: '0 0 0.5rem 0', textAlign: 'left' }}>
-             Paste your resume text here:
-           </h2>
- 
-           <textarea
-             placeholder="Type or paste your resume text..."
-             style={{
-               flex: 1,              // fills remaining vertical space
-               width: '100%',
-               resize: 'vertical',   // user can still resize if they want
-               border: '1px solid #ccc',
-               borderRadius: '6px',
-               padding: '8px',
-               fontSize: '16px',
-               overflowY: 'auto',
-             }}
-           />
-         </div>
-       )}
+        <div
+          style={{
+            width: '60%',
+            height: '350px',
+            border: '2px dashed #000', // same dashed border
+            borderRadius: '12px',
+            backgroundColor: '#FFF',
+            display: 'flex',
+            flexDirection: 'column',
+            margin: '30px auto', // center horizontally
+            padding: '1rem', // some inner padding
+            boxSizing: 'border-box',
+          }}
+        >
+          <h2 style={{ margin: '0 0 0.5rem 0', textAlign: 'left' }}>
+            Paste your resume text here:
+          </h2>
+
+          <textarea
+            placeholder="Type or paste your resume text..."
+            style={{
+              flex: 1, // fills remaining vertical space
+              width: '100%',
+              resize: 'vertical', // user can still resize if they want
+              border: '1px solid #ccc',
+              borderRadius: '6px',
+              padding: '8px',
+              fontSize: '16px',
+              overflowY: 'auto',
+            }}
+          />
+        </div>
+      )}
     </div>
   );
 }
@@ -306,6 +297,7 @@ function DragDropResume({ handleAnalyzeFiles }) {
 function App() {
   const [loading, setLoading] = useState(false);
   const [fileData, setFileData] = useState(null);
+  const [fileDataList, setFileDataList] = useState([]);
   const navigate = useNavigate();
 
   // Called by "Analyze" button
@@ -316,34 +308,35 @@ function App() {
     } else {
       // TODO
       //bulk backend call
+      const newFileDataList = [];
 
       setLoading(true);
 
-    try {
-      const formData = new FormData();
-      formData.append('file', files[0]);
+      for (const file of files) {
+        const formData = new FormData();
+        formData.append('file', file);
 
-      const response = await fetch('http://localhost:8080/upload', {
-        method: 'POST',
-        body: formData,
-      });
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const response = await fetch('http://localhost:8080/upload', {
+          method: 'POST',
+          body: formData,
+        });
+
+        const data = await response.json();
+
+        newFileDataList.push({
+          name: file.name,
+          base64Data: data.fileData,
+          mimeType: data.mimeType,
+        });
       }
 
-      const data = await response.json();
-      setFileData({ base64Data: data.fileData, mimeType: data.mimeType });
+      setFileDataList(newFileDataList);
       setLoading(false);
 
-      //go to results
+      // Navigate and pass all files as state
       navigate('/bulk_results', {
-        state: { fileData: data.fileData, mimeType: data.mimeType },
+        state: { files: newFileDataList },
       });
-    } catch (err) {
-      console.error('Upload error:', err);
-      setLoading(false);
-    }
-      
     }
   };
 
@@ -415,6 +408,7 @@ function App() {
     </>
   );
 }
+
 
 function MainApp() {
   return (

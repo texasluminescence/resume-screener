@@ -1,37 +1,22 @@
-import React, { useState } from 'react';
-import { Container, Row, Col, Card, ListGroup } from 'react-bootstrap';
-import "./ResumeMenu.css"
+import React from 'react';
+import "./ResumeMenu.css";
 
-const ResumeMenu = (  { isOpen, sidebarRef }   ) => {
-  const resumes = [
-    { id: 1, name: "John Doe", content: "John's resume content..." },
-    { id: 2, name: "Jane Smith", content: "Jane's resume content..." },
-    { id: 3, name: "Bob Johnson", content: "Bob's resume content..." },
-    { id: 4, name: "Alice Brown", content: "Alice's resume content..." },
-    { id: 1, name: "John Doe", content: "John's resume content..." },
-    { id: 2, name: "Jane Smith", content: "Jane's resume content..." },
-    { id: 3, name: "Bob Johnson", content: "Bob's resume content..." },
-    { id: 4, name: "Alice Brown", content: "Alice's resume content..." },
-    { id: 1, name: "John Doe", content: "John's resume content..." },
-    { id: 2, name: "Jane Smith", content: "Jane's resume content..." },
-    { id: 3, name: "Bob Johnson", content: "Bob's resume content..." },
-    { id: 4, name: "Alice Brown", content: "Alice's resume content..." },
-  ];
-
-  const [selectedResume, setSelectedResume] = useState(resumes[0]);
-
-
+const ResumeMenu = ({ isOpen, sidebarRef, resumes, onSelect, selectedIndex }) => {
   return (
-        <div className={`sidebar ${isOpen ? "open" : ""}`} ref={sidebarRef}>
-            {resumes.map((resume) => (
-              <div className="sidebar-rectangle">
-                <div className="sidebar-footer">
-                  <h1 className="sidebar-text">{resume.name}</h1>
-                  <h1 className="sidebar-score-text">Score: 89</h1>
-                </div>
-              </div>
-            ))}
+    <div className={`sidebar ${isOpen ? 'open' : ''}`} ref={sidebarRef}>
+      {resumes.map((resume, index) => (
+        <div
+          key={index}
+          className={`sidebar-rectangle ${selectedIndex === index ? 'selected' : ''}`}
+          onClick={() => onSelect(index)}
+        >
+          <div className="sidebar-footer">
+            <h1 className="sidebar-text">Resume {index + 1}</h1>
+            <h1 className="sidebar-score-text">Score: 89</h1>
+          </div>
         </div>
+      ))}
+    </div>
   );
 };
 
