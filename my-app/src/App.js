@@ -16,6 +16,8 @@ import BulkUploadPreview from './BulkUploadPreview';
 import BulkResult from './BulkResult';
 import { Document, Page } from 'react-pdf';
 import GeneratePage from './GeneratePage';
+import GeneratedResumePage from './GeneratedResume';
+
 
 const buttonStyle = {
   backgroundColor: '#FFF',
@@ -416,6 +418,7 @@ function MainApp() {
       <Route path="/" element={<App />} />
       <Route path="/results" element={<Results />} />
       <Route path="/generate" element={<GeneratePage />} />
+      <Route path="/generated"  element={<GeneratedResumePage />} />
       <Route path="/signin" element={<SignIn />} />
       <Route path="/bulk_results" element={<BulkResult />} />
     </Routes>

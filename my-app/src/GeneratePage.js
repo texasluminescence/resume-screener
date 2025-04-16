@@ -1,13 +1,16 @@
 // GeneratePage.js
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import './GeneratePage.css'; // <-- Import your CSS file
+import { useNavigate } from 'react-router-dom';
+import './GeneratePage.css';
 
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import BulkUploadPreview from './BulkUploadPreview';
 
+
 export default function GeneratePage() {
+  const navigate = useNavigate();
   const location = useLocation();
   const files = location.state?.files || [];
 
@@ -29,19 +32,43 @@ export default function GeneratePage() {
     leadership: '',
   });
 
-  const handleChange = (e) => {
-    setFormData((prev) => ({
-      ...prev,
-      [e.target.name]: e.target.value,
-    }));
+  const handleChange = (e) =>
+    setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+
+  const handleGenerate = () => {
+    navigate('/generated', { state: { formData, files } });
   };
 
   return (
     <>
       <Navbar />
 
-      <div style={{ padding: '40px', textAlign: 'center' }}>
+      <div
+        style={{
+          backgroundColor: '#F4F4F4',
+          minHeight: '100vh',
+          padding: '40px 0',
+          textAlign: 'center',
+        }}
+      >
         <h1>Generate Page</h1>
+
+        <button
+          onClick={handleGenerate}
+          style={{
+            display: 'block',
+            margin: '20px auto',
+            padding: '10px 20px',
+            backgroundColor: '#000',
+            color: '#fff',
+            border: 'none',
+            borderRadius: '6px',
+            cursor: 'pointer',
+            fontSize: '16px',
+          }}
+        >
+          Generate
+        </button>
 
         {files.length === 1 && (
           <div style={{ margin: '2rem auto' }}>
@@ -57,175 +84,118 @@ export default function GeneratePage() {
             textAlign: 'left',
           }}
         >
-          <div style={{ marginBottom: '1rem' }}>
-            <span className="labelTitle">Name:</span>
-            <textarea
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              placeholder="Enter your name"
-              className="textareaField"
-            />
-          </div>
-
-          <div style={{ marginBottom: '1rem' }}>
-            <span className="labelTitle">Phone Number:</span>
-            <textarea
-              name="phone number"
-              value={formData.phone_number}
-              onChange={handleChange}
-              placeholder="Enter your phone number:"
-              className="textareaField"
-            />
-          </div>
-
-          <div style={{ marginBottom: '1rem' }}>
-            <span className="labelTitle">School Email:</span>
-            <textarea
-              name="school email"
-              value={formData.school_email}
-              onChange={handleChange}
-              placeholder="Enter your school email"
-              className="textareaField"
-            />
-          </div>
-
-          <div style={{ marginBottom: '1rem' }}>
-            <span className="labelTitle">Github Username:</span>
-            <textarea
-              name="git user"
-              value={formData.git_user}
-              onChange={handleChange}
-              placeholder="Enter your github username"
-              className="textareaField"
-            />
-          </div>
-
-          <div style={{ marginBottom: '1rem' }}>
-            <span className="labelTitle">LinkedIn Username:</span>
-            <textarea
-              name="linkedin user"
-              value={formData.linkedin_user}
-              onChange={handleChange}
-              placeholder="Enter your LinkedIn username"
-              className="textareaField"
-            />
-          </div>
-
-          <div style={{ marginBottom: '1rem' }}>
-            <span className="labelTitle">Expected Graduation:</span>
-            <textarea
-              name="grad data"
-              value={formData.grad_data}
-              onChange={handleChange}
-              placeholder="Enter your expected graduation"
-              className="textareaField"
-            />
-          </div>
-
-          <div style={{ marginBottom: '1rem' }}>
-            <span className="labelTitle">GPA:</span>
-            <textarea
-              name="gpa"
-              value={formData.gpa}
-              onChange={handleChange}
-              placeholder="Enter your gpa"
-              className="textareaField"
-            />
-          </div>
-
-          <div style={{ marginBottom: '1rem' }}>
-            <span className="labelTitle">Courses:</span>
-            <textarea
-              name="courses"
-              value={formData.courses}
-              onChange={handleChange}
-              placeholder="Enter your courses"
-              className="textareaField"
-            />
-          </div>
-
-          <div style={{ marginBottom: '1rem' }}>
-            <span className="labelTitle">Tech Skills:</span>
-            <textarea
-              name="tech skills"
-              value={formData.tech_skills}
-              onChange={handleChange}
-              placeholder="Enter your tech skills"
-              className="textareaField"
-            />
-          </div>
-
-          <div style={{ marginBottom: '1rem' }}>
-            <span className="labelTitle">Languages:</span>
-            <textarea
-              name="languages"
-              value={formData.languages}
-              onChange={handleChange}
-              placeholder="Enter your languages"
-              className="textareaField"
-            />
-          </div>
-
-          <div style={{ marginBottom: '1rem' }}>
-            <span className="labelTitle">Certificates:</span>
-            <textarea
-              name="certificates"
-              value={formData.certificates}
-              onChange={handleChange}
-              placeholder="Enter your certificates"
-              className="textareaField"
-            />
-          </div>
-
-          <div style={{ marginBottom: '1rem' }}>
-            <span className="labelTitle">Honors:</span>
-            <textarea
-              name="honors"
-              value={formData.honors}
-              onChange={handleChange}
-              placeholder="Enter your honors"
-              className="textareaField"
-            />
-          </div>
-
-          <div style={{ marginBottom: '1rem' }}>
-            <span className="labelTitle">Experience:</span>
-            <textarea
-              name="experience"
-              value={formData.experience}
-              onChange={handleChange}
-              placeholder="Describe your experiences"
-              className="textareaFieldLarge"
-            />
-          </div>
-
-          <div style={{ marginBottom: '1rem' }}>
-            <span className="labelTitle">Projects:</span>
-            <textarea
-              name="projects"
-              value={formData.projects}
-              onChange={handleChange}
-              placeholder="Describe your projects"
-              className="textareaFieldLarge"
-            />
-          </div>
-
-          <div style={{ marginBottom: '1rem' }}>
-            <span className="labelTitle">Leadership:</span>
-            <textarea
-              name="leadership"
-              value={formData.leadership}
-              onChange={handleChange}
-              placeholder="Describe your leadership experience"
-              className="textareaFieldLarge"
-            />
-          </div>
+          <Field
+            label="Name"
+            name="name"
+            value={formData.name}
+            onChange={handleChange}
+          />
+          <Field
+            label="Phone Number"
+            name="phone_number"
+            value={formData.phone_number}
+            onChange={handleChange}
+          />
+          <Field
+            label="School Email"
+            name="school_email"
+            value={formData.school_email}
+            onChange={handleChange}
+          />
+          <Field
+            label="Github Username"
+            name="git_user"
+            value={formData.git_user}
+            onChange={handleChange}
+          />
+          <Field
+            label="LinkedIn Username"
+            name="linkedin_user"
+            value={formData.linkedin_user}
+            onChange={handleChange}
+          />
+          <Field
+            label="Expected Graduation"
+            name="grad_data"
+            value={formData.grad_data}
+            onChange={handleChange}
+          />
+          <Field
+            label="GPA"
+            name="gpa"
+            value={formData.gpa}
+            onChange={handleChange}
+          />
+          <Field
+            label="Courses"
+            name="courses"
+            value={formData.courses}
+            onChange={handleChange}
+          />
+          <Field
+            label="Tech Skills"
+            name="tech_skills"
+            value={formData.tech_skills}
+            onChange={handleChange}
+          />
+          <Field
+            label="Languages"
+            name="languages"
+            value={formData.languages}
+            onChange={handleChange}
+          />
+          <Field
+            label="Certificates"
+            name="certificates"
+            value={formData.certificates}
+            onChange={handleChange}
+          />
+          <Field
+            label="Honors"
+            name="honors"
+            value={formData.honors}
+            onChange={handleChange}
+          />
+          <Field
+            label="Experience"
+            name="experience"
+            value={formData.experience}
+            onChange={handleChange}
+            large
+          />
+          <Field
+            label="Projects"
+            name="projects"
+            value={formData.projects}
+            onChange={handleChange}
+            large
+          />
+          <Field
+            label="Leadership"
+            name="leadership"
+            value={formData.leadership}
+            onChange={handleChange}
+            large
+          />
         </div>
       </div>
 
-
       <Footer />
     </>
+  );
+}
+
+function Field({ label, name, value, onChange, large = false }) {
+  return (
+    <div style={{ marginBottom: '1rem' }}>
+      <span className="labelTitle">{label}:</span>
+      <textarea
+        name={name}
+        value={value}
+        onChange={onChange}
+        placeholder={`Enter your ${label.toLowerCase()}`}
+        className={large ? 'textareaFieldLarge' : 'textareaField'}
+      />
+    </div>
   );
 }
